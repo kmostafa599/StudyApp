@@ -3,7 +3,7 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 // import { updateVote } from '../../../store/actions';
-import BonusTable from './BonusTable';
+import UsersTable from './UsersTable';
 
 
 
@@ -25,13 +25,13 @@ export default function SwitchTabs() {
                 <Tab className="px-10 py-3 cursor-pointer text-[16px]">Students</Tab>
             </TabList>
             <TabPanel>
-                <BonusTable  />
+                <UsersTable  />
             </TabPanel>
             <TabPanel>
-                <BonusTable  filterNew />
+                <UsersTable  filterNew />
             </TabPanel>
             <TabPanel>
-                <BonusTable  voting />
+                <UsersTable  voting />
             </TabPanel>
             
         </Tabs>

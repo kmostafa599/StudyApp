@@ -1,7 +1,7 @@
 import TableBody from './TableBody'
 import TableHead from './TableHead'
 
-export default function BonusTable({ users}) {
+export default function UsersTable({ users}) {
 
     
 
