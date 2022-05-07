@@ -1,6 +1,18 @@
+import { useFormik } from 'formik'
 import Input from '../../elements/Input'
 
 export default function EditProfileForm({ handleChange, handleSubmit, }) {
+    const formik = useFormik({
+        initialValues:{
+            firstName: "",
+            lastName: "",
+            email: "",
+            city: "",
+        },
+        onSubmit:values =>{
+
+        }
+    })
     return (
         <form onChange={handleChange} onSubmit={handleSubmit}>
             <div className='grid lg:grid-cols-2 grid-cols-1 gap-5'>
