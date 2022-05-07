@@ -1,5 +1,4 @@
 import React from 'react'
-import { useRef } from 'react'
 import Faq from '../components/Faq'
 import Footer from '../components/Footer'
 import Header from '../components/Header'

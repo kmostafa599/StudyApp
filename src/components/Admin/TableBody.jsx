@@ -1,10 +1,15 @@
+import { Link } from "react-router-dom";
 import Button from "../../elements/Button";
 
-export default function TableBody({ users }) {
+export default function TableBody({ users,filter }) {
+    if(filter){
+        users = users.filter(u=>u.team === filter)
+    }
+    
     return (
         <tbody className="bg-white divide-y divide-gray-200 text-xs">
             {users.length > 0 ? (users.map((person) => (
-                <tr key={person.id} className={`${person.suggestedProposal ? "font-bold" : "font-light"}`}>
+                <tr key={person.id} className={`${person.bonus ? "font-bold" : "font-light"}`}>
                     <td className="px-2 py-6 whitespace-nowrap">
                         {person.id}
                     </td>
@@ -22,52 +27,21 @@ export default function TableBody({ users }) {
                         {person.team}
                     </td>
                     <td className="px-6 whitespace-nowrap">
-                        <div className="text-gray-500">{person.suggestedProposal.votes.length}</div>
+                        <div className="text-gray-500">{person.votes}</div>
                     </td>
-                    <td className="px-6 whitespace-nowrap text-gray-800 font-bold">£{person.suggestedProposal.bonus}</td>
+                    <td className="px-6 whitespace-nowrap text-gray-800 font-bold">£{person.bonus}</td>
                     <td className="px-6 whitespace-nowrap text-gray-800 font-medium">{person.bonus}</td>
                     <td className="px-0 py-5 whitespace-nowrap text-right font-medium flex items-center gap-2">
-                        {
-                            person.approved &&
-                            <>
-                                <Button>
-                                    <i className="fa-solid fa-xmark"></i><span className='sm:block hidden'>Decline</span>
-                                </Button>
-                                <Button>
-                                    <i className="fa-solid fa-check"></i> <span className='sm:block hidden'>Approve</span>
-                                </Button>
-                            </>
-                        }
-                        {
-                            person.suggestedProposal.length<users.length && //voting
-                            <>
-                                <Button>
-                                    <i className="fa-solid fa-xmark"></i> <span className='sm:block hidden'>No</span>
-                                </Button>
-                                <Button>
-                                    <i className="fa-solid fa-check"></i> <span className='sm:block hidden'>Yes</span>
-                                </Button>
-                            </>
-                        }
-                        {
-                            person.suggestedProposal === users.length &&
-                            <>
-                                <Button disabled>
-                                    <span className='px-3 py-1 bg-black text-white rounded-full'>{person.votes}</span><span className='sm:block hidden'>No</span>
-                                </Button>
-                                <Button disabled>
-                                    <span className='px-3 py-1 bg-black text-white rounded-full'>{person.votes}</span><span className='sm:block hidden'>Yes</span>
-                                </Button>
-                            </>
-                        }
-                        {
-                            person.declined &&
-                            <>
-                                <Button disabled>
-                                    <i className="fa-solid fa-xmark"></i> <span className=' font-bold'>Declined</span>
-                                </Button>
-                            </>
-                        }
+                        <Button>
+                            <Link to={`/chat/${person.id}`}>
+                            <i className="fa-solid fa-xmark"></i> <span className='sm:block hidden'>details</span>
+                            </Link>
+                        </Button>
+                        <Button>
+                            <Link to={`/chat/${person.id}`}>
+                            <i className="fa-solid fa-xmark"></i> <span className='sm:block hidden'>Open chat</span>
+                            </Link>
+                        </Button>
                     </td>
                 </tr>
             ))) : (
